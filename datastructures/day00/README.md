@@ -79,12 +79,12 @@ Click OK. A new window should open. IntelliJ needs you to specify a place for it
 
 # Assignment Checklist
 
-- [ ] I've filled out [this](https://goo.gl/forms/iIcRZXaDP6nuO7fD2) Google form to provide input and learning goals (also linked at the top of this README)
-- [ ] Git is installed.
-- [ ] I've forked the DSA-18 repository using [these](./GitSetup.md) instructions
-- [ ] I've added the DSA-18 repository as an upstream remote
-- [ ] IntelliJ is installed and I've run `HelloWorld.java`
+- [x] I've filled out [this](https://goo.gl/forms/iIcRZXaDP6nuO7fD2) Google form to provide input and learning goals (also linked at the top of this README)
+- [x] Git is installed.
+- [x] I've forked the DSA-18 repository using [these](./GitSetup.md) instructions
+- [x] I've added the DSA-18 repository as an upstream remote
+- [x] IntelliJ is installed and I've run `HelloWorld.java`
 - [ ] **Optional** I've familiarized myself with the debugger.
 - [ ] **Optional** I've completed 10 levels of the [Git tutorial](http://learngitbranching.js.org/)
-- [ ] I've joined [the DSA channel](https://olin.slack.com/messages/dsa-18) `#dsa-18` on Slack.
-- [ ] I've filled out [this](https://goo.gl/forms/epFStUdhHJpqvJ0h2) Google form regarding getting set.
+- [x] I've joined [the DSA channel](https://olin.slack.com/messages/dsa-18) `#dsa-18` on Slack.
+- [x] I've filled out [this](https://goo.gl/forms/epFStUdhHJpqvJ0h2) Google form regarding getting set.
