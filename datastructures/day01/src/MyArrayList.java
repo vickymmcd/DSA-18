@@ -2,19 +2,19 @@ public class MyArrayList {
     private Cow[] elems;
     private int size;
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(1)
     public MyArrayList() {
         elems = new Cow[10];
         size = 0;
     }
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(1)
     public MyArrayList(int capacity) {
         elems = new Cow[capacity];
         size = 0;
     }
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(1)*
     public void add(Cow c) {
         if(size==elems.length){
             grow();
@@ -23,12 +23,12 @@ public class MyArrayList {
         size++;
     }
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(1)
     public int size() {
         return size;
     }
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(1)
     public Cow get(int index) {
         if(elems[index] == null){
             throw new IndexOutOfBoundsException("Sorry, there is no cow at that index");
@@ -36,7 +36,7 @@ public class MyArrayList {
         return elems[index];
     }
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(N)
     public Cow remove(int index) {
         if(index >= elems.length || index < 0){
             throw new IndexOutOfBoundsException("Sorry, that is not a valid index");
@@ -58,13 +58,14 @@ public class MyArrayList {
         return removed;
     }
 
+    // Runtime: O(N)
     public void shrink(){
         Cow[] B = new Cow[(int)(.5*elems.length)];
         System.arraycopy(elems,0, B, 0, size);
         elems = B;
     }
 
-    // TODO: Runtime: O(?)
+    // Runtime: O(N)
     public void add(int index, Cow c) {
         if(size == elems.length){
             grow();
@@ -92,6 +93,7 @@ public class MyArrayList {
         }
     }
 
+    // Runtime: O(N)
     public void grow(){
         Cow[] B = new Cow[size*2];
         System.arraycopy(elems,0, B, 0, size);
