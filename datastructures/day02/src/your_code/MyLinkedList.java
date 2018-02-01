@@ -85,7 +85,26 @@ public class MyLinkedList {
     }
 
     public Chicken remove(int index) {
-        // TODO
+        int count = 0;
+        Node curr_node = head;
+        while(count < size){
+            if(count == index){
+                if (index==0){
+                    return removeFirst();
+                }
+                else if (index==size-1){
+                    return removeLast();
+                }
+                else if(size>1) {
+                    curr_node.next.prev = curr_node.prev;
+                    curr_node.prev.next = curr_node.next;
+                    size--;
+                    return curr_node.val;
+                }
+            }
+            count++;
+            curr_node = curr_node.next;
+        }
         return null;
     }
 
