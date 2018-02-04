@@ -1,6 +1,5 @@
 package your_code;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -8,7 +7,6 @@ import java.util.LinkedList;
  */
 public class MyPriorityQueue {
 
-    private MyStack myStack = new MyStack();
     private LinkedList<Integer> maxlist;
     private LinkedList<Integer> maxes;
     private int size;
