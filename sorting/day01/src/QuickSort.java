@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class QuickSort extends SortAlgorithm {
@@ -11,16 +12,20 @@ public class QuickSort extends SortAlgorithm {
     }
 
     /**
-     * TODO
-     * Best-case runtime:
-     * Worst-case runtime:
-     * Average-case runtime:
+     * Best-case runtime: O(nlogn)
+     * Worst-case runtime: O(n^2) but we are hopefully avoiding this with the random shuffling
+     * Average-case runtime: O(nlogn)
      *
-     * Space-complexity:
+     * Space-complexity: O(logn)
      */
     @Override
     public int[] sort(int[] array) {
-        // TODO: Sort the array. Make sure you avoid the O(N^2) runtime worst-case
+        Random random = new Random();
+        for(int i=0; i<array.length; i++){
+            int index = random.nextInt(array.length);
+            swap(array, i, index);
+        }
+        quickSort(array, 0, array.length-1);
         return array;
     }
 
@@ -35,7 +40,8 @@ public class QuickSort extends SortAlgorithm {
     public void quickSort(int[] a, int lo, int hi) {
         if (lo < hi) {
             int p = partition(a, lo, hi);
-            // TODO
+            quickSort(a, lo, p-1);
+            quickSort(a, p+1, hi);
         }
     }
 
@@ -49,8 +55,21 @@ public class QuickSort extends SortAlgorithm {
      * @param hi The ending index of the subarray being considered (inclusive)
      */
     public int partition(int[] array, int lo, int hi) {
-        // TODO
-        return 0;
+        int num = array[lo];
+        for(int k=lo; k<hi+1; k++){
+            if(array[k] < num){
+                array[lo] = array[k];
+                //array[lo+1] = num;
+                for(int i=k; i>lo+1; i--){
+                    array[i] = array[i-1];
+                }
+                array[lo+1] = num;
+                lo++;
+            }
+
+        }
+
+        return lo;
     }
 
 }
