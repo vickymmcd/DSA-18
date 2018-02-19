@@ -7,7 +7,6 @@ public class TripleSum {
 
     static int tripleSum(int arr[], int sum) {
         HashMap<Integer, List<Integer[]>> sums = new HashMap<>();
-        HashMap<Integer, Integer[]> done_pairs = new HashMap<>();
         int count = 0;
 
         for(int i=0; i<arr.length; i++){
