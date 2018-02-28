@@ -64,8 +64,7 @@ public class Problems {
      */
 
     public static int countSwaps(int[] A) {
-        // TODO
-        return 0;
+        return MergeSort.getSwaps(A);
     }
 
 }
