@@ -47,10 +47,22 @@ public class PeakFinding {
         return maxIndex;
     }
 
+    private static int recursiveOneDPeak(int i, int[] nums){
+        if(i>=nums.length){
+            return -1;
+        }
+        if(peakOneD(i, nums) == 0){
+            return i;
+        }
+        else{
+            return recursiveOneDPeak(i+1, nums);
+        }
+    }
+
 
     public static int findOneDPeak(int[] nums) {
         // TODO
-        return 0;
+        return recursiveOneDPeak(0, nums);
     }
 
     public static int[] findTwoDPeak(int[][] nums) {
