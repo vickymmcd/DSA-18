@@ -15,9 +15,12 @@
       <file leaf-file-name="PeakFinding.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PeakFinding.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="47" column="5" lean-forward="false" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="3060">
+              <caret line="170" column="5" lean-forward="true" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
+              <folding>
+                <element signature="e#4970#4971#0" expanded="true" />
+                <element signature="e#5032#5033#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,8 +61,8 @@
       <file leaf-file-name="PeakFindingTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/PeakFindingTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="36" column="53" lean-forward="false" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="53" />
+            <state relative-caret-position="200">
+              <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -312,13 +315,34 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_day04 - 2018.02.27 at 16h 43m 15s.xml">
-      <configuration name="All in day04" configurationId="JUnit" />
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 29m 15s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_day04 - 2018.02.27 at 16h 45m 21s.xml">
-      <configuration name="All in day04" configurationId="JUnit" />
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 39m 52s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="PeakFindingTest - 2018.02.28 at 13h 33m 01s.xml">
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 42m 48s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 44m 27s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 45m 18s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 47m 36s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 48m 06s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 18h 48m 30s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 19h 28m 12s.xml">
+      <configuration name="PeakFindingTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="PeakFindingTest - 2018.02.28 at 19h 29m 36s.xml">
       <configuration name="PeakFindingTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -328,13 +352,13 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32959184" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -366,7 +390,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="936">
           <caret line="52" column="17" lean-forward="false" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
-          <folding />
+          <folding>
+            <element signature="e#4970#4971#0" expanded="true" />
+            <element signature="e#5032#5033#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -417,7 +444,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4970#4971#0" expanded="true" />
+            <element signature="e#5032#5033#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -461,18 +491,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/RadioTowersTest.java">
+    <entry file="file://$PROJECT_DIR$/src/RadioTowers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+        <state relative-caret-position="414">
+          <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/PeakFindingTest.java">
+    <entry file="file://$PROJECT_DIR$/test/RadioTowersTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="36" column="53" lean-forward="false" selection-start-line="36" selection-start-column="46" selection-end-line="36" selection-end-column="53" />
+        <state relative-caret-position="0">
+          <caret line="0" column="13" lean-forward="false" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -488,19 +518,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RadioTowers.java">
+    <entry file="file://$PROJECT_DIR$/test/PeakFindingTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="26" column="20" lean-forward="false" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+        <state relative-caret-position="200">
+          <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PeakFinding.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="47" column="5" lean-forward="false" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="3060">
+          <caret line="170" column="5" lean-forward="true" selection-start-line="170" selection-start-column="5" selection-end-line="170" selection-end-column="5" />
+          <folding>
+            <element signature="e#4970#4971#0" expanded="true" />
+            <element signature="e#5032#5033#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
