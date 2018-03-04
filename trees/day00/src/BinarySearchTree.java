@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> {
@@ -28,8 +29,18 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     public List<T> inOrderTraversal() {
-        // TODO
-        return null;
+        // finds in order traversal, my implementation
+        List<T> result = new LinkedList<>();
+        TreeNode<T> currNode = findMin(root);
+        if(currNode == null){
+            return result;
+        }
+        while(findSuccessor(currNode) != null){
+            result.add(currNode.key);
+            currNode = findSuccessor(currNode);
+        }
+        result.add(currNode.key);
+        return result;
     }
 
     /**
@@ -45,9 +56,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return false;
         }
         TreeNode<T> deleted = delete(toDelete);
-        if (toDelete == root) {
-            root = deleted;
-        }
         size--;
         return true;
     }
@@ -58,20 +66,29 @@ public class BinarySearchTree<T extends Comparable<T>> {
 
         TreeNode<T> replacement;
 
-        if (n.isLeaf())
+        if (n.isLeaf()) {
             // Case 1: no children
             replacement = null;
-        else if (n.hasRightChild() != n.hasLeftChild())
+            if(n==root)
+                root = null;
+        }
+        else if (n.hasRightChild() != n.hasLeftChild()) {
             // Case 2: one child
             replacement = (n.hasRightChild()) ? n.rightChild : n.leftChild; // replacement is the non-null child
+            if(n==root)
+                root = replacement;
+        }
         else {
             // Case 3: two children
             // TODO
-            replacement = null;
+            replacement = findMin(n.rightChild);
+            n.key = replacement.key;
+            return delete(replacement);
         }
 
         // Put the replacement in its correct place, and set the parent.
         n.replaceWith(replacement);
+
         return replacement;
     }
 
@@ -96,13 +113,60 @@ public class BinarySearchTree<T extends Comparable<T>> {
     }
 
     private TreeNode<T> findPredecessor(TreeNode<T> n) {
-        // TODO
+        // finds in order predecessor, my implementation
+        TreeNode<T> prev = n;
+        TreeNode<T> predecessor;
+
+        if(n.hasLeftChild()){
+            return findMax(n.leftChild);
+        }
+
+        while(prev.parent != null) {
+            if (prev.parent.hasRightChild() && prev.parent.rightChild == prev) {
+                predecessor = prev.parent;
+                return predecessor;
+            }
+            prev = prev.parent;
+        }
+
         return null;
     }
 
     private TreeNode<T> findSuccessor(TreeNode<T> n) {
-        // TODO
+        // finds in order successor, my implementation
+        TreeNode<T> prev = n;
+        TreeNode<T> successor;
+
+        if(n.hasRightChild()){
+            return findMin(n.rightChild);
+        }
+
+        while(prev.parent != null) {
+            if (prev.parent.hasLeftChild() && prev.parent.leftChild == prev) {
+                successor = prev.parent;
+                return successor;
+            }
+            prev = prev.parent;
+        }
+
         return null;
+    }
+
+    private TreeNode<T> findMax(TreeNode<T> n){
+        if(!n.hasRightChild()){
+            return n;
+        }
+        return findMax(n.rightChild);
+    }
+
+    private TreeNode<T> findMin(TreeNode<T> n){
+        if(n==null){
+            return null;
+        }
+        if(!n.hasLeftChild()){
+            return n;
+        }
+        return findMin(n.leftChild);
     }
 
     /**
