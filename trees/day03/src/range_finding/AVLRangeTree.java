@@ -83,6 +83,17 @@ public class AVLRangeTree extends BinarySearchTree<Integer> {
     // TODO: runtime = O(logN))
     public int rangeCount(int lo, int hi) {
         // TODO
+        return recursiveRangeCount(lo, hi, root);
+    }
+
+    public int recursiveRangeCount(int lo, int hi, RangeNode<Integer> node){
+        if(node.isLeaf() && node.key >= lo && node.key <= hi){
+            return 1;
+        }
+        if(node.key >= lo && node.key <= hi){
+            return recursiveRangeCount(lo, hi, node.leftChild) + recursiveRangeCount(lo, hi, node.rightChild) + 1;
+        }
+
         return 0;
     }
 
