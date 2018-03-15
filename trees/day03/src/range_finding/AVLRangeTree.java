@@ -79,22 +79,39 @@ public class AVLRangeTree extends BinarySearchTree<Integer> {
     }
 
     // return the number of keys between [lo, hi], inclusive
-    // TODO: runtime = O(?)
+    // TODO: runtime = O(logn)
     public int rangeCount(int lo, int hi) {
-        // TODO
         return recursiveRangeCount(lo, hi, root);
     }
 
-    public int recursiveRangeCount(int lo, int hi, RangeNode<Integer> node){
-        if(node.isLeaf() && node.key >= lo && node.key <= hi){
-            return 1;
+    private int recursiveRangeCount(int lo, int hi, RangeNode<Integer> node){
+        if(node.isLeaf()){
+            if(node.key >= lo && node.key <= hi)
+                return 1;
+            else
+                return 0;
+        }
+        if(node.hasLeftChild() && !node.hasRightChild()){
+            if(node.key >= lo && node.key <= hi){
+                return recursiveRangeCount(lo, hi, node.leftChild) + 1;
+            }
+            else
+                return recursiveRangeCount(lo, hi, node.leftChild);
+        }
+        if(node.hasRightChild() && !node.hasLeftChild()){
+            if(node.key >= lo && node.key <= hi){
+                return recursiveRangeCount(lo, hi, node.rightChild) + 1;
+            }
+            else
+                return recursiveRangeCount(lo, hi, node.rightChild);
         }
         if(node.key >= lo && node.key <= hi){
             return recursiveRangeCount(lo, hi, node.leftChild) + recursiveRangeCount(lo, hi, node.rightChild) + 1;
         }
 
-        return 0;
+        return recursiveRangeCount(lo, hi, node.leftChild) + recursiveRangeCount(lo, hi, node.rightChild);
     }
+
 
     /**
      * Returns the balance factor of the subtree. The balance factor is defined
