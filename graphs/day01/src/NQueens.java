@@ -37,6 +37,30 @@ public class NQueens {
         return false;
     }
 
+    /*
+    returns true if a queen is found
+     */
+    public static boolean checkRow(char[][] board, int r){
+        int x = 0;
+        while(x< board[0].length){
+            if(board[x][r] == 'Q') return true;
+            x++;
+        }
+        return false;
+    }
+
+    /*
+    returns true if a queen is found
+     */
+    public static boolean checkColumn(char[][] board, int c){
+        int y = 0;
+        while(y< board.length){
+            if(board[c][y] == 'Q') return true;
+            y++;
+        }
+        return false;
+    }
+
 
     /**
      * Creates a deep copy of the input array and returns it
@@ -52,7 +76,39 @@ public class NQueens {
     public static List<char[][]> nQueensSolutions(int n) {
         // TODO
         List<char[][]> answers = new ArrayList<>();
+        char[][] queens = new char[n][n];
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                queens[i][j] = '.';
+            }
+        }
+        int[] columns = new int[n];
+        answers = nQueensRecursive(queens, 0, columns, answers);
+
         return answers;
+    }
+
+    private static List<char[][]> addSolution(char[][]board, List<char[][]> curr){
+        curr.add(board);
+        return curr;
+    }
+
+    private static List<char[][]> nQueensRecursive(char[][] answers, int row, int[] columns, List<char[][]> curr){
+        if(row==answers.length)
+            return addSolution(answers, curr);
+        List<char[][]> result= new ArrayList<char[][]>();
+        for(int i=0; i<answers.length; i++){
+            if(columns[i] == 0){
+                columns[i] = 1;
+                answers[i][row] = 'Q';
+                result = nQueensRecursive(answers, row+1, columns, curr);
+
+                answers[i][row] = '.';
+                columns[i] = 0;
+            }
+        }
+        return result;
+
     }
 
 }
