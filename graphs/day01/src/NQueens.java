@@ -73,8 +73,10 @@ public class NQueens {
     }
 
 
+    /*
+    time O(n!) and space O(n^2)
+     */
     public static List<char[][]> nQueensSolutions(int n) {
-        // TODO
         List<char[][]> answers = new ArrayList<>();
         char[][] queens = new char[n][n];
         for(int i=0; i<n; i++){
@@ -89,7 +91,8 @@ public class NQueens {
     }
 
     private static List<char[][]> addSolution(char[][]board, List<char[][]> curr){
-        curr.add(board);
+        curr.add(copyOf(board));
+
         return curr;
     }
 
@@ -98,16 +101,16 @@ public class NQueens {
             return addSolution(answers, curr);
         List<char[][]> result= new ArrayList<char[][]>();
         for(int i=0; i<answers.length; i++){
-            if(columns[i] == 0){
+            if(columns[i] == 0 && !checkDiagonal(answers, row, i)){
                 columns[i] = 1;
-                answers[i][row] = 'Q';
-                result = nQueensRecursive(answers, row+1, columns, curr);
+                answers[row][i] = 'Q';
+                nQueensRecursive(answers, row+1, columns, curr);
 
-                answers[i][row] = '.';
+                answers[row][i] = '.';
                 columns[i] = 0;
             }
         }
-        return result;
+        return curr;
 
     }
 

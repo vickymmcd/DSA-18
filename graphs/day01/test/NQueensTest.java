@@ -41,6 +41,7 @@ public class NQueensTest {
                 }
             }
         }
+        System.out.println();
         assertEquals(0, queens);
     }
 
