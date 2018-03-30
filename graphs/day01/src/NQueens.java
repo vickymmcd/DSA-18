@@ -99,7 +99,6 @@ public class NQueens {
     private static List<char[][]> nQueensRecursive(char[][] answers, int row, int[] columns, List<char[][]> curr){
         if(row==answers.length)
             return addSolution(answers, curr);
-        List<char[][]> result= new ArrayList<char[][]>();
         for(int i=0; i<answers.length; i++){
             if(columns[i] == 0 && !checkDiagonal(answers, row, i)){
                 columns[i] = 1;

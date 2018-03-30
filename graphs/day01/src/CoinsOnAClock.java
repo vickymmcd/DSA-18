@@ -6,7 +6,7 @@ public class CoinsOnAClock {
     public static List<char[]> coinsOnAClock(int pennies, int nickels, int dimes, int hoursInDay) {
         List<char[]> result = new ArrayList<>();
         char[] soln = new char[hoursInDay];
-        return coinsOnAClockRecursive(result, soln, pennies, nickels, dimes, hoursInDay, 0);
+        return coinsOnAClockRecursive(result, soln, pennies, nickels, dimes, hoursInDay, 0, 0);
     }
 
     private static List<char[]> addSolution(List<char[]> curr, char[] soln){
@@ -16,8 +16,8 @@ public class CoinsOnAClock {
         return curr;
     }
 
-    public static List<char[]> coinsOnAClockRecursive(List<char[]> curr, char[] soln, int pennies, int nickels, int dimes, int hoursInDay, int loc){
-        if(pennies+nickels+dimes == 0)
+    public static List<char[]> coinsOnAClockRecursive(List<char[]> curr, char[] soln, int pennies, int nickels, int dimes, int hoursInDay, int loc, int counter){
+        if(counter == hoursInDay)
             return addSolution(curr, soln);
         for(int i=0; i<3; i++){
             int newloc;
@@ -26,26 +26,26 @@ public class CoinsOnAClock {
                     soln[loc] = 'p';
                     pennies--;
                     newloc = (loc + 1) % soln.length;
-                    coinsOnAClockRecursive(curr, soln, pennies, nickels, dimes, hoursInDay, newloc);
+                    coinsOnAClockRecursive(curr, soln, pennies, nickels, dimes, hoursInDay, newloc, counter+1);
+                    soln[loc] = 0;
                     pennies++;
                 }
                 if (i == 1 && nickels > 0) {
                     soln[loc] = 'n';
                     nickels--;
                     newloc = (loc + 5) % soln.length;
-                    coinsOnAClockRecursive(curr, soln, pennies, nickels, dimes, hoursInDay, newloc);
+                    coinsOnAClockRecursive(curr, soln, pennies, nickels, dimes, hoursInDay, newloc, counter+1);
+                    soln[loc] = 0;
                     nickels++;
                 }
                 if (i == 2 && dimes > 0) {
                     soln[loc] = 'd';
                     dimes--;
                     newloc = (loc + 10) % soln.length;
-                    coinsOnAClockRecursive(curr, soln, pennies, nickels, dimes, hoursInDay, newloc);
+                    coinsOnAClockRecursive(curr, soln, pennies, nickels, dimes, hoursInDay, newloc, counter+1);
+                    soln[loc] = 0;
                     dimes++;
                 }
-            }
-            else{
-                return curr;
             }
 
         }
