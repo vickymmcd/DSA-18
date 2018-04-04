@@ -33,7 +33,11 @@ public class PuzzleTest {
      */
     @Test
     public void testGoal() {
+
         assertEquals(board.isGoal(), false);
+        int[][] initState2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 0}};
+        Board board2 = new Board(initState2);
+        assertEquals(board2.isGoal(), true);
     }
 
     // Test solver with several initial board states

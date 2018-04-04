@@ -11,13 +11,14 @@ public class Board {
 
     //TODO
     // Create a 2D array representing the solved board state
-    private int[][] goal = {{}};
+    private int[][] goal = {{1,2,3},{4,5,6},{7,8,0}};
 
     /*
      * Set the global board size and tile state
      */
     public Board(int[][] b) {
-        // TODO: Your code here
+        this.n = b.length;
+        this.tiles = b;
     }
 
     /*
@@ -25,24 +26,45 @@ public class Board {
      (equal to 3 for 8 puzzle, 4 for 15 puzzle, 5 for 24 puzzle, etc)
      */
     private int size() {
-        // TODO: Your code here
-        return 0;
+        return n;
     }
 
     /*
      * Sum of the manhattan distances between the tiles and the goal
      */
     public int manhattan() {
-        // TODO: Your code here
-        return 0;
+        int dist = 0;
+        for(int ti = 0; ti < tiles.length;ti++)
+
+        {
+            for(int tj = 0; tj < tiles.length; tj++) {
+
+             int tileToCheck = tiles[ti][tj];
+
+                for (int gi = 0; gi < goal.length; gi++) {
+                    for (int gj = 0; gj < goal[0].length; gj++)
+
+                    {
+                        if(goal[gi][gj] == tileToCheck && tileToCheck != 0)
+                        {
+                            dist = Math.abs(gi-ti) + Math.abs(gj-tj) + dist;
+                        }
+
+
+                    }
+
+                }
+            }
+        }
+
+        return dist;
     }
 
     /*
      * Compare the current state to the goal state
      */
     public boolean isGoal() {
-        // TODO: Your code here
-        return false;
+        return(manhattan() == 0);
     }
 
     /*
@@ -50,6 +72,8 @@ public class Board {
      * Research how to check this without exploring all states
      */
     public boolean solvable() {
+        //determine if number of inversions is even or odd
+        //can check for inversions by checking if one is bigger than one that comes after it
         // TODO: Your code here
         return false;
     }
