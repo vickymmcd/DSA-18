@@ -111,43 +111,19 @@ public class BinarySearchTree<T extends Comparable<T>> {
      */
     TreeNode<T> insert(TreeNode<T> node, T key) {
         if (node == null) {
-            //root = new TreeNode<>(key);
             return new TreeNode<>(key);
         }
         int cmp = key.compareTo(node.key);
-        System.out.print("key: ");
-        System.out.println(key);
-
 
         if (cmp < 0) {
             node.leftChildSize++;
             node.leftChild = insert(node.leftChild, key);
-            inversions = inversions + rightChildSize(node.rightChild) + 1;
-            //node.leftChildSize++;
-            System.out.println("inversions " + inversions);
+            inversions = inversions + node.rightChildSize + 1;
 
         } else {
-            System.out.println("ami here");
             node.rightChildSize++;
             node.rightChild = insert(node.rightChild, key);
         }
         return node;
-    }
-
-    public int rightChildSize(TreeNode<T> n){
-        if(n==null) return 0;
-
-        if(n.isLeaf()) return 1;
-
-        if(n.hasRightChild() && n.hasLeftChild()){
-            return   (rightChildSize(n.leftChild) + rightChildSize(n.rightChild));
-        }
-        if (n.hasLeftChild())
-        {
-            return rightChildSize(n.leftChild);
-        }
-        if (n.hasRightChild()) {return rightChildSize(n.rightChild);}
-
-        return 0;
     }
 }

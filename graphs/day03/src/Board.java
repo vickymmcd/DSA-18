@@ -86,14 +86,10 @@ public class Board {
                 }
             }
         }
-        // TODO: Your code here
-        System.out.println("hello");
         System.out.println(mytree.inversions);
-        System.out.println("lc " + mytree.root.leftChild);
 
 
-        if(mytree.inversions%2 == 0) return true;
-        return false;
+        return(mytree.inversions%2 == 0);
     }
 
     public void printBoard(){
@@ -140,7 +136,7 @@ public class Board {
 
     public static void main(String[] args) {
         // DEBUG - Your solution can include whatever output you find useful
-        int[][] initState = {{8, 1, 2}, {0, 4, 3}, {7, 6, 5}};
+        int[][] initState = {{1, 8, 2}, {0, 4, 3}, {7, 6, 5}};
         Board board = new Board(initState);
 
         System.out.println("Size: " + board.size());
