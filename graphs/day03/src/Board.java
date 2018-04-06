@@ -49,10 +49,7 @@ public class Board {
                         {
                             dist = Math.abs(gi-ti) + Math.abs(gj-tj) + dist;
                         }
-
-
                     }
-
                 }
             }
         }
@@ -74,8 +71,38 @@ public class Board {
     public boolean solvable() {
         //determine if number of inversions is even or odd
         //can check for inversions by checking if one is bigger than one that comes after it
+
+        AVLTree<Integer> mytree = new AVLTree<Integer>();
+
+        int inversions = 0;
+
+        for(int row = 0; row<tiles.length; row++)
+        {
+            for(int col = 0; col<tiles.length; col++)
+            {
+                int toCheck = tiles[row][col];
+                if(toCheck != 0) {
+                    mytree.add(toCheck);
+                }
+            }
+        }
         // TODO: Your code here
+        System.out.println("hello");
+        System.out.println(mytree.inversions);
+        System.out.println("lc " + mytree.root.leftChild);
+
+
+        if(mytree.inversions%2 == 0) return true;
         return false;
+    }
+
+    public void printBoard(){
+        for(int x=0; x<tiles.length; x++){
+            for(int y=0; y<tiles.length; y++){
+                System.out.print(tiles[x][y] + " ");
+            }
+            System.out.println();
+        }
     }
 
     /*
@@ -113,7 +140,7 @@ public class Board {
 
     public static void main(String[] args) {
         // DEBUG - Your solution can include whatever output you find useful
-        int[][] initState = {{1, 2, 3}, {4, 0, 6}, {7, 8, 5}};
+        int[][] initState = {{8, 1, 2}, {0, 4, 3}, {7, 6, 5}};
         Board board = new Board(initState);
 
         System.out.println("Size: " + board.size());
@@ -121,6 +148,7 @@ public class Board {
         System.out.println("Manhattan: " + board.manhattan());
         System.out.println("Is goal: " + board.isGoal());
         System.out.println("Neighbors:");
+
         Iterable<Board> it = board.neighbors();
     }
 }
