@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Board definition for the 8 Puzzle challenge
@@ -86,19 +85,29 @@ public class Board {
                 }
             }
         }
-        System.out.println(mytree.inversions);
 
 
         return(mytree.inversions%2 == 0);
     }
 
-    public void printBoard(){
-        for(int x=0; x<tiles.length; x++){
-            for(int y=0; y<tiles.length; y++){
-                System.out.print(tiles[x][y] + " ");
+    public static void printBoard(Board b){
+        for(int x=0; x<b.tiles.length; x++){
+            for(int y=0; y<b.tiles.length; y++){
+                System.out.print(b.tiles[x][y] + " ");
             }
             System.out.println();
         }
+        System.out.println();
+    }
+
+    /**
+     * Creates a deep copy of the input array and returns it
+     */
+    private static int[][] copyOf(int[][] A) {
+        int[][] B = new int[A.length][A[0].length];
+        for (int i = 0; i < A.length; i++)
+            System.arraycopy(A[i], 0, B[i], 0, A[0].length);
+        return B;
     }
 
     /*
@@ -106,7 +115,40 @@ public class Board {
      */
     public Iterable<Board> neighbors() {
         // TODO: Your code here
-        return null;
+        ArrayList<Board> boards = new ArrayList<Board>();
+        int[][] temp;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(tiles[i][j] == 0){
+                    if(i+1 < n){
+                        temp = copyOf(tiles);
+                        temp[i][j] = temp[i+1][j];
+                        temp[i+1][j] = 0;
+                        boards.add(new Board(temp));
+                    }
+                    if(i-1 >= 0){
+                        temp = copyOf(tiles);
+                        temp[i][j] = temp[i-1][j];
+                        temp[i-1][j] = 0;
+                        boards.add(new Board(temp));
+                    }
+                    if(j+1 < n){
+                        temp = copyOf(tiles);
+                        temp[i][j] = temp[i][j+1];
+                        temp[i][j+1] = 0;
+                        boards.add(new Board(temp));
+                    }
+                    if(j-1 >= 0){
+                        temp = copyOf(tiles);
+                        temp[i][j] = temp[i][j-1];
+                        temp[i][j-1] = 0;
+                        boards.add(new Board(temp));
+                    }
+                }
+
+            }
+        }
+        return boards;
     }
 
     /*
@@ -136,7 +178,7 @@ public class Board {
 
     public static void main(String[] args) {
         // DEBUG - Your solution can include whatever output you find useful
-        int[][] initState = {{1, 8, 2}, {0, 4, 3}, {7, 6, 5}};
+        int[][] initState = {{2, 1, 3}, {4, 0, 5}, {7, 8, 6}};
         Board board = new Board(initState);
 
         System.out.println("Size: " + board.size());
@@ -146,5 +188,8 @@ public class Board {
         System.out.println("Neighbors:");
 
         Iterable<Board> it = board.neighbors();
+        for (Board b: it) {
+            printBoard(b);
+        }
     }
 }

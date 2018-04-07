@@ -15,7 +15,7 @@ public class Solver {
      * State class to make the cost calculations simple
      * This class holds a board state and all of its attributes
      */
-    private class State {
+    private class State implements Comparable<State>{
         // Each state needs to keep track of its cost and the previous state
         private Board board;
         private int moves; // equal to g-cost in A*
@@ -27,7 +27,7 @@ public class Solver {
             this.moves = moves;
             this.prev = prev;
             // TODO
-            cost = 0;
+            cost = moves + board.manhattan();
         }
 
         @Override
@@ -37,23 +37,33 @@ public class Solver {
             if (!(s instanceof State)) return false;
             return ((State) s).board.equals(this.board);
         }
+
+        @Override
+        public int compareTo(State s){
+            return cost - s.cost;
+        }
     }
 
     /*
      * Return the root state of a given state
      */
     private State root(State state) {
-        // TODO: Your code here
-        return null;
+        while(state.prev != null){
+            state = state.prev;
+        }
+        return state;
     }
 
     /*
      * A* Solver
      * Find a solution to the initial board using A* to generate the state tree
      * and a identify the shortest path to the the goal state
+     * This is the constructor for the solver class
      */
     public Solver(Board initial) {
-        // TODO: Your code here
+        solutionState = new State(initial, 0, null);
+        solution();
+
     }
 
     /*
@@ -61,8 +71,7 @@ public class Solver {
      * Research how to check this without exploring all states
      */
     public boolean isSolvable() {
-        // TODO: Your code here
-        return false;
+        return solutionState.board.solvable();
     }
 
     /*
@@ -70,7 +79,57 @@ public class Solver {
      */
     public Iterable<Board> solution() {
         // TODO: Your code here
-        return null;
+        ArrayList<Board> mySolution = new ArrayList<>();
+        PriorityQueue<State> open = new PriorityQueue<>();
+        PriorityQueue<State> closed = new PriorityQueue<>();
+        State u;
+        boolean ignore = false;
+
+        open.add(this.solutionState);
+        mySolution.add(solutionState.board);
+
+        if(!isSolvable()){
+            solved = false;
+            return null;
+        }
+
+        while(!open.isEmpty()){
+            State q = open.poll();
+            for (Board b: q.board.neighbors()) {
+                u = new State(b,q.moves+1, q);
+                if(b.isGoal()){
+                    this.solutionState = u;
+                    this.solved = true;
+                    this.minMoves = u.moves;
+                    return mySolution;
+                }
+                ignore = false;
+
+                for (State s: open) {
+                    if(s.equals(u) && s.cost <= u.cost){
+                        ignore = true;
+                        break;
+                    }
+                }
+
+                for (State s: closed){
+                    if(s.equals(u) && s.cost <= u.cost){
+                        ignore = true;
+                        break;
+                    }
+                }
+
+                if(!ignore){
+                    //mySolution.add(u.board);
+                    open.add(u);
+
+                }
+            }
+            closed.add(q);
+
+        }
+        //minMoves = mySolution.size();
+        return mySolution;
     }
 
     public State find(Iterable<State> iter, Board b) {

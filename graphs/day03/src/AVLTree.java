@@ -112,7 +112,7 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
         x.leftChild = n;
         n.rightChild = b;
 
-        x.rightChildSize = x.leftChildSize;
+        n.rightChildSize = x.leftChildSize;
         x.leftChildSize = x.leftChildSize + n.leftChildSize + 1;
 
 

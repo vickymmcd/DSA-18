@@ -126,4 +126,24 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         return node;
     }
+
+    // class for debugging right child size
+    public int rightChildSize(TreeNode<T> n){
+        if(n==null) return 0;
+
+        if(n.isLeaf()) return 1;
+
+        if(n.hasRightChild() && n.hasLeftChild()){
+            return   (rightChildSize(n.leftChild) + rightChildSize(n.rightChild));
+        }
+        if (n.hasLeftChild())
+        {
+            return rightChildSize(n.leftChild);
+        }
+        if (n.hasRightChild()) {
+            return rightChildSize(n.rightChild);
+        }
+
+        return 0;
+    }
 }
