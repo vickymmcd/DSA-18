@@ -114,7 +114,6 @@ public class Board {
      * Return all neighboring boards in the state tree
      */
     public Iterable<Board> neighbors() {
-        // TODO: Your code here
         ArrayList<Board> boards = new ArrayList<Board>();
         int[][] temp;
         for (int i = 0; i < n; i++) {

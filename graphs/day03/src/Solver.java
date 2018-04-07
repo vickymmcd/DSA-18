@@ -62,35 +62,21 @@ public class Solver {
      */
     public Solver(Board initial) {
         solutionState = new State(initial, 0, null);
-        solution();
+        solveIt();
 
     }
 
-    /*
-     * Is the input board a solvable state
-     * Research how to check this without exploring all states
-     */
-    public boolean isSolvable() {
-        return solutionState.board.solvable();
-    }
-
-    /*
-     * Return the sequence of boards in a shortest solution, null if unsolvable
-     */
-    public Iterable<Board> solution() {
-        // TODO: Your code here
-        ArrayList<Board> mySolution = new ArrayList<>();
+    public boolean solveIt(){
         PriorityQueue<State> open = new PriorityQueue<>();
         PriorityQueue<State> closed = new PriorityQueue<>();
         State u;
-        boolean ignore = false;
+        boolean ignore;
 
         open.add(this.solutionState);
-        mySolution.add(solutionState.board);
 
         if(!isSolvable()){
             solved = false;
-            return null;
+            return false;
         }
 
         while(!open.isEmpty()){
@@ -101,7 +87,7 @@ public class Solver {
                     this.solutionState = u;
                     this.solved = true;
                     this.minMoves = u.moves;
-                    return mySolution;
+                    return true;
                 }
                 ignore = false;
 
@@ -120,7 +106,6 @@ public class Solver {
                 }
 
                 if(!ignore){
-                    //mySolution.add(u.board);
                     open.add(u);
 
                 }
@@ -128,8 +113,33 @@ public class Solver {
             closed.add(q);
 
         }
-        //minMoves = mySolution.size();
-        return mySolution;
+        return false;
+    }
+
+    /*
+     * Is the input board a solvable state
+     * Research how to check this without exploring all states
+     */
+    public boolean isSolvable() {
+        return solutionState.board.solvable();
+    }
+
+    /*
+     * Return the sequence of boards in a shortest solution, null if unsolvable
+     */
+    public Iterable<Board> solution() {
+        State state = this.solutionState;
+        ArrayList<Board> boards = new ArrayList<>();
+        if(!isSolvable()){
+            return null;
+        }
+        else{
+            while(state != null){
+                boards.add(state.board);
+                state = state.prev;
+            }
+        }
+        return boards;
     }
 
     public State find(Iterable<State> iter, Board b) {
