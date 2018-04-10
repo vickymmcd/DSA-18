@@ -68,7 +68,7 @@ public class Solver {
 
     public boolean solveIt(){
         PriorityQueue<State> open = new PriorityQueue<>();
-        PriorityQueue<State> closed = new PriorityQueue<>();
+        ArrayList<State> closed = new ArrayList<>();
         State u;
         boolean ignore;
 
