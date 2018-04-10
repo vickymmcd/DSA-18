@@ -4,9 +4,58 @@ import java.util.concurrent.ThreadLocalRandom;
 // use this class if you are designing your own Rubik's cube implementation
 public class RubiksCube {
 
+    /**
+     * Class to represent Cubie
+     */
+    public class Cubie{
+        String color1;
+        String color2;
+        String color3;
+
+        public Cubie(String a, String b, String c){
+            color1 = a;
+            color2 = b;
+            color3 = c;
+        }
+    }
+
+    /**
+     * Class to represent Face
+     */
+    public class Face{
+        Cubie cubie1;
+        Cubie cubie2;
+        Cubie cubie3;
+        Cubie cubie4;
+        String faceLocation;
+
+        public Face(Cubie a, int acol, int aloc, Cubie b, int bcol, int bloc,
+                    Cubie c, int ccol, int cloc, Cubie d, int dcol, int dloc, String loc){
+            cubie1 = a;
+            cubie2 = b;
+            cubie3 = c;
+            cubie4 = d;
+            faceLocation = loc;
+        }
+    }
+
     // initialize a solved rubiks cube
     public RubiksCube() {
-        // TODO
+        Cubie cubie1 = new Cubie("yellow", "orange", "green");
+        Cubie cubie2 = new Cubie("yellow", "red", "green");
+        Cubie cubie3 = new Cubie("yellow", "orange", "blue");
+        Cubie cubie4 = new Cubie("yellow", "red", "blue");
+        Face f0 = new Face(cubie1, 0, 0, cubie2, 0, 1, cubie3,
+                0, 2, cubie4, 0, 3, "f0");
+
+        Cubie cubie5 = new Cubie("white", "red", "blue");
+        Cubie cubie6 = new Cubie("white", "orange", "blue");
+        Cubie cubie7 = new Cubie("white", "red", "green");
+        Cubie cubie8 = new Cubie("white", "orange", "green");
+        Face f1 = new Face(cubie5, 0, 0, cubie6, 0, 1, cubie7,
+                0, 2, cubie8, 0, 3, "f1");
+
+
     }
 
 
