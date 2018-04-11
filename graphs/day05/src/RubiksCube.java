@@ -11,11 +11,13 @@ public class RubiksCube {
         String color1;
         String color2;
         String color3;
+        String[] colors;
 
         public Cubie(String a, String b, String c){
             color1 = a;
             color2 = b;
             color3 = c;
+            colors = new String[]{a, b, c};
         }
     }
 
@@ -24,17 +26,28 @@ public class RubiksCube {
      */
     public class Face{
         Cubie cubie1;
+        String cubie1col;
         Cubie cubie2;
+        String cubie2col;
         Cubie cubie3;
+        String cubie3col;
         Cubie cubie4;
+        String cubie4col;
         String faceLocation;
 
-        public Face(Cubie a, int acol, int aloc, Cubie b, int bcol, int bloc,
-                    Cubie c, int ccol, int cloc, Cubie d, int dcol, int dloc, String loc){
+        /**
+         * Don't need to include location as parameter just input them in order of location
+         */
+        public Face(Cubie a, int acol, Cubie b, int bcol,
+                    Cubie c, int ccol, Cubie d, int dcol, String loc){
             cubie1 = a;
+            cubie1col = cubie1.colors[acol];
             cubie2 = b;
+            cubie2col = cubie2.colors[bcol];
             cubie3 = c;
+            cubie3col = cubie3.colors[ccol];
             cubie4 = d;
+            cubie4col = cubie4.colors[dcol];
             faceLocation = loc;
         }
     }
@@ -45,15 +58,23 @@ public class RubiksCube {
         Cubie cubie2 = new Cubie("yellow", "red", "green");
         Cubie cubie3 = new Cubie("yellow", "orange", "blue");
         Cubie cubie4 = new Cubie("yellow", "red", "blue");
-        Face f0 = new Face(cubie1, 0, 0, cubie2, 0, 1, cubie3,
-                0, 2, cubie4, 0, 3, "f0");
+        Face f0 = new Face(cubie1, 0, cubie2, 0, cubie3,
+                0, cubie4, 0, "f0");
 
         Cubie cubie5 = new Cubie("white", "red", "blue");
         Cubie cubie6 = new Cubie("white", "orange", "blue");
         Cubie cubie7 = new Cubie("white", "red", "green");
         Cubie cubie8 = new Cubie("white", "orange", "green");
-        Face f1 = new Face(cubie5, 0, 0, cubie6, 0, 1, cubie7,
-                0, 2, cubie8, 0, 3, "f1");
+        Face f1 = new Face(cubie5, 0, cubie6, 0, cubie7,
+                0, cubie8, 0, "f1");
+
+        Face r0 = new Face(cubie2, 1, cubie7, 1, cubie4, 1, cubie5, 1, "r0");
+
+        Face r1 = new Face(cubie8, 1, cubie1, 1, cubie6, 1, cubie3, 1, "r1");
+
+        Face u0 = new Face(cubie8, 2, cubie7, 2, cubie1, 2, cubie2, 2, "u0");
+
+        Face u1 = new Face(cubie3, 2, cubie4, 2, cubie6, 2, cubie5, 2, "u1");
 
 
     }
