@@ -10,6 +10,7 @@ public class RubiksCube {
     Face r1;
     Face u0;
     Face u1;
+    Face[] faces;
 
     /**
      * Class to represent Cubie
@@ -41,6 +42,7 @@ public class RubiksCube {
         Cubie cubie4;
         String cubie4col;
         String faceLocation;
+        Cubie[] cubies;
 
         /**
          * Don't need to include location as parameter just input them in order of location
@@ -56,6 +58,7 @@ public class RubiksCube {
             cubie4 = d;
             cubie4col = cubie4.colors[dcol];
             faceLocation = loc;
+            cubies = new Cubie[]{cubie1, cubie2, cubie3, cubie4};
         }
     }
 
@@ -76,13 +79,15 @@ public class RubiksCube {
         f1 = new Face(cubie5, 0, cubie6, 0, cubie7,
                 0, cubie8, 0, "f1");
 
-        r0 = new Face(cubie2, 1, cubie7, 1, cubie4, 1, cubie5, 1, "r0");
+        r0 = new Face(cubie2, 1, cubie6, 1, cubie4, 1, cubie8, 1, "r0");
 
-        r1 = new Face(cubie8, 1, cubie1, 1, cubie6, 1, cubie3, 1, "r1");
+        r1 = new Face(cubie5, 1, cubie1, 1, cubie7, 1, cubie3, 1, "r1");
 
         u0 = new Face(cubie8, 2, cubie7, 2, cubie1, 2, cubie2, 2, "u0");
 
         u1 = new Face(cubie3, 2, cubie4, 2, cubie6, 2, cubie5, 2, "u1");
+
+        faces = new Face[]{f0, f1, r0, r1, u0, u1};
 
 
     }
@@ -151,6 +156,17 @@ public class RubiksCube {
         return this;
     }
 
+    public void printCube(){
+        for(int i=0; i<faces.length; i++){
+            System.out.print(faces[i].cubie1col + " ");
+            System.out.println(faces[i].cubie2col);
+            System.out.print(faces[i].cubie3col + " ");
+            System.out.println(faces[i].cubie4col);
+            System.out.println();
+            System.out.println();
+        }
+    }
+
     // returns a random scrambled rubik's cube by applying random rotations
     public static RubiksCube scrambledCube(int numTurns) {
         RubiksCube r = new RubiksCube();
@@ -193,6 +209,11 @@ public class RubiksCube {
     public List<Character> solve() {
         // TODO
         return new ArrayList<>();
+    }
+
+    public static void main(String[] args){
+        RubiksCube mycube = new RubiksCube();
+        mycube.printCube();
     }
 
 }
