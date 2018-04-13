@@ -138,7 +138,8 @@ public class RubiksCube {
     // Do not modify this rubik's cube.
     public RubiksCube rotate(char c) {
         // TODO
-        if(c=='u'){
+        if (c == 'u'){
+            // changing the Cubie orientation on the upper face
             Cubie temp = u0.cubie1;
             Cubie temp2 = u0.cubie2;
             u0.cubie1 = u0.cubie3;
@@ -146,7 +147,27 @@ public class RubiksCube {
             temp = u0.cubie4;
             u0.cubie4 = temp2;
             u0.cubie3 = temp;
+
+            // changing the orientation of front and right faces accordingly
+            temp = f0.cubie1;
+            temp2 = f0.cubie2;
+            f0.cubie1 = r0.cubie1;
+            f0.cubie2 = r0.cubie2;
+
+            Cubie temp3 = r1.cubie1;
+            Cubie temp4 = r1.cubie2;
+            r1.cubie1 = temp;
+            r1.cubie2 = temp2;
+
+            temp = f1.cubie1;
+            temp2 = f1.cubie2;
+            f1.cubie1 = temp3;
+            f1.cubie2 = temp4;
+
+            r0.cubie1 = temp;
+            r0.cubie2 = temp2;
         }
+        else if (c == 'U')
 
         return this;
     }
