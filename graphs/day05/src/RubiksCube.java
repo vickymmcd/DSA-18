@@ -21,6 +21,23 @@ public class RubiksCube {
         public Cubie(String a, String b, String c){
             colors = new String[]{a, b, c};
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Cubie)) {
+                return false;
+            }
+
+            Cubie other = (Cubie) obj;
+
+            for (int i = 0; i < colors.length; i++) {
+                if (!other.colors[i].equals(this.colors[i])) {
+                    return false;
+                }
+            }
+
+        return true;
+        }
     }
 
     /**
@@ -39,6 +56,26 @@ public class RubiksCube {
             faceLocation = loc;
             cubies = new Cubie[]{a, b, c, d};
             cubiecols = new String[]{acol, bcol, ccol, dcol};
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Face)) {
+                return false;
+            }
+
+            Face other = (Face) obj;
+
+            for (int i = 0; i < this.cubies.length; i++) {
+                if (!other.cubies[i].equals(this.cubies[i])) {
+                    return false;
+                }
+                if (!other.cubiecols[i].equals(this.cubiecols[i])) {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 
@@ -69,6 +106,9 @@ public class RubiksCube {
 
         faces = new Face[]{f0, f1, r0, r1, u0, u1};
 
+        Face[] faces = {f0, f1, r0, r1, u0, u1};
+
+
 
     }
 
@@ -83,6 +123,7 @@ public class RubiksCube {
                     r.faces[i].faceLocation);
             newFaces[i] = newFace;
         }
+
         f0 = newFaces[0];
         f1 = newFaces[1];
         r0 = newFaces[2];
@@ -90,7 +131,8 @@ public class RubiksCube {
         u0 = newFaces[4];
         u1 = newFaces[5];
 
-        faces = new Face[]{f0, f1, r0, r1, u0, u1};
+
+        Face[] faces = {f0, f1, r0, r1, u0, u1};
     }
 
     // return true if this rubik's cube is equal to the other rubik's cube
@@ -99,8 +141,16 @@ public class RubiksCube {
         if (!(obj instanceof RubiksCube))
             return false;
         RubiksCube other = (RubiksCube) obj;
-        // TODO
-        return false;
+        if (other.hashCode() != this.hashCode()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.faces.length; i++) {
+           if (!other.faces[i].equals(faces[i])) {
+               return false;
+           }
+        }
+        return true;
     }
 
     /**
