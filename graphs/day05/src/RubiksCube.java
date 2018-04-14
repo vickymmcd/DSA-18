@@ -21,6 +21,23 @@ public class RubiksCube {
         public Cubie(String a, String b, String c){
             colors = new String[]{a, b, c};
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Cubie)) {
+                return false;
+            }
+
+            Cubie other = (Cubie) obj;
+
+            for (int i = 0; i < colors.length; i++) {
+                if (!other.colors[i].equals(this.colors[i])) {
+                    return false;
+                }
+            }
+
+        return true;
+        }
     }
 
     /**
@@ -34,11 +51,31 @@ public class RubiksCube {
         /**
          * Don't need to include location as parameter just input them in order of location
          */
-        public Face(Cubie a, int acol, Cubie b, int bcol,
-                    Cubie c, int ccol, Cubie d, int dcol, String loc){
+        public Face(Cubie a, String acol, Cubie b, String bcol,
+                    Cubie c, String ccol, Cubie d, String dcol, String loc){
             faceLocation = loc;
             cubies = new Cubie[]{a, b, c, d};
-            cubiecols = new String[]{a.colors[acol], b.colors[bcol], c.colors[ccol], d.colors[dcol]};
+            cubiecols = new String[]{acol, bcol, ccol, dcol};
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Face)) {
+                return false;
+            }
+
+            Face other = (Face) obj;
+
+            for (int i = 0; i < this.cubies.length; i++) {
+                if (!other.cubies[i].equals(this.cubies[i])) {
+                    return false;
+                }
+                if (!other.cubiecols[i].equals(this.cubiecols[i])) {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 
@@ -48,26 +85,29 @@ public class RubiksCube {
         Cubie cubie2 = new Cubie("yellow", "red", "green");
         Cubie cubie3 = new Cubie("yellow", "orange", "blue");
         Cubie cubie4 = new Cubie("yellow", "red", "blue");
-        f0 = new Face(cubie1, 0, cubie2, 0, cubie3,
-                0, cubie4, 0, "f0");
+        f0 = new Face(cubie1, cubie1.colors[0], cubie2, cubie2.colors[0], cubie3,
+                cubie3.colors[0], cubie4, cubie4.colors[0], "f0");
 
         Cubie cubie5 = new Cubie("white", "orange", "blue");
         Cubie cubie6 = new Cubie("white", "red", "blue");
         Cubie cubie7 = new Cubie("white", "orange", "green");
         Cubie cubie8 = new Cubie("white", "red", "green");
 
-        f1 = new Face(cubie5, 0, cubie6, 0, cubie7,
-                0, cubie8, 0, "f1");
+        f1 = new Face(cubie5, cubie5.colors[0], cubie6, cubie6.colors[0], cubie7,
+                cubie7.colors[0], cubie8, cubie8.colors[0], "f1");
 
-        r0 = new Face(cubie2, 1, cubie6, 1, cubie4, 1, cubie8, 1, "r0");
+        r0 = new Face(cubie2, cubie2.colors[1], cubie6, cubie6.colors[1], cubie4, cubie4.colors[1], cubie8, cubie8.colors[1], "r0");
 
-        r1 = new Face(cubie5, 1, cubie1, 1, cubie7, 1, cubie3, 1, "r1");
+        r1 = new Face(cubie5, cubie5.colors[1], cubie1, cubie1.colors[1], cubie7, cubie7.colors[1], cubie3, cubie3.colors[1], "r1");
 
-        u0 = new Face(cubie8, 2, cubie7, 2, cubie1, 2, cubie2, 2, "u0");
+        u0 = new Face(cubie8, cubie8.colors[2], cubie7, cubie7.colors[2], cubie1, cubie1.colors[2], cubie2, cubie2.colors[2], "u0");
 
-        u1 = new Face(cubie3, 2, cubie4, 2, cubie6, 2, cubie5, 2, "u1");
+        u1 = new Face(cubie3, cubie3.colors[2], cubie4, cubie4.colors[2], cubie6, cubie6.colors[2], cubie5, cubie5.colors[2], "u1");
 
         faces = new Face[]{f0, f1, r0, r1, u0, u1};
+
+        Face[] faces = {f0, f1, r0, r1, u0, u1};
+
 
 
     }
@@ -75,7 +115,23 @@ public class RubiksCube {
 
     // creates a copy of the rubics cube
     public RubiksCube(RubiksCube r) {
-        // TODO
+        Face newF;
+        Face[] newFaces = new Face[6];
+
+
+        for (int i = 0; i < r.faces.length; i++) {
+            newF = new Face(r.faces[i].cubies[0], r.faces[i].cubiecols[0], r.faces[i].cubies[1], r.faces[i].cubiecols[1], r.faces[i].cubies[2], r.faces[i].cubiecols[2], r.faces[i].cubies[3], r.faces[i].cubiecols[3], r.faces[i].faceLocation);
+            newFaces[i] = newF;
+        }
+
+        f0 = newFaces[0];
+        f1 = newFaces[1];
+        r0 = newFaces[2];
+        r1 = newFaces[3];
+        u0 = newFaces[4];
+        u1 = newFaces[5];
+
+        Face[] faces = {f0, f1, r0, r1, u0, u1};
     }
 
     // return true if this rubik's cube is equal to the other rubik's cube
@@ -84,8 +140,16 @@ public class RubiksCube {
         if (!(obj instanceof RubiksCube))
             return false;
         RubiksCube other = (RubiksCube) obj;
-        // TODO
-        return false;
+        if (other.hashCode() != this.hashCode()) {
+            return false;
+        }
+
+        for (int i = 0; i < this.faces.length; i++) {
+           if (!other.faces[i].equals(faces[i])) {
+               return false;
+           }
+        }
+        return true;
     }
 
     /**
