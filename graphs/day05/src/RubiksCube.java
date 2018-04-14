@@ -34,11 +34,11 @@ public class RubiksCube {
         /**
          * Don't need to include location as parameter just input them in order of location
          */
-        public Face(Cubie a, int acol, Cubie b, int bcol,
-                    Cubie c, int ccol, Cubie d, int dcol, String loc){
+        public Face(Cubie a, String acol, Cubie b, String bcol,
+                    Cubie c, String ccol, Cubie d, String dcol, String loc){
             faceLocation = loc;
             cubies = new Cubie[]{a, b, c, d};
-            cubiecols = new String[]{a.colors[acol], b.colors[bcol], c.colors[ccol], d.colors[dcol]};
+            cubiecols = new String[]{acol, bcol, ccol, dcol};
         }
     }
 
@@ -48,24 +48,24 @@ public class RubiksCube {
         Cubie cubie2 = new Cubie("yellow", "red", "green");
         Cubie cubie3 = new Cubie("yellow", "orange", "blue");
         Cubie cubie4 = new Cubie("yellow", "red", "blue");
-        f0 = new Face(cubie1, 0, cubie2, 0, cubie3,
-                0, cubie4, 0, "f0");
+        f0 = new Face(cubie1, cubie1.colors[0], cubie2, cubie2.colors[0], cubie3,
+                cubie3.colors[0], cubie4, cubie4.colors[0], "f0");
 
         Cubie cubie5 = new Cubie("white", "orange", "blue");
         Cubie cubie6 = new Cubie("white", "red", "blue");
         Cubie cubie7 = new Cubie("white", "orange", "green");
         Cubie cubie8 = new Cubie("white", "red", "green");
 
-        f1 = new Face(cubie5, 0, cubie6, 0, cubie7,
-                0, cubie8, 0, "f1");
+        f1 = new Face(cubie5, cubie5.colors[0], cubie6, cubie6.colors[0], cubie7,
+                cubie7.colors[0], cubie8, cubie8.colors[0], "f1");
 
-        r0 = new Face(cubie2, 1, cubie6, 1, cubie4, 1, cubie8, 1, "r0");
+        r0 = new Face(cubie2, cubie2.colors[1], cubie6, cubie6.colors[1], cubie4, cubie4.colors[1], cubie8, cubie8.colors[1], "r0");
 
-        r1 = new Face(cubie5, 1, cubie1, 1, cubie7, 1, cubie3, 1, "r1");
+        r1 = new Face(cubie5, cubie5.colors[1], cubie1, cubie1.colors[1], cubie7, cubie7.colors[1], cubie3, cubie3.colors[1], "r1");
 
-        u0 = new Face(cubie8, 2, cubie7, 2, cubie1, 2, cubie2, 2, "u0");
+        u0 = new Face(cubie8, cubie8.colors[2], cubie7, cubie7.colors[2], cubie1, cubie1.colors[2], cubie2, cubie2.colors[2], "u0");
 
-        u1 = new Face(cubie3, 2, cubie4, 2, cubie6, 2, cubie5, 2, "u1");
+        u1 = new Face(cubie3, cubie3.colors[2], cubie4, cubie4.colors[2], cubie6, cubie6.colors[2], cubie5, cubie5.colors[2], "u1");
 
         faces = new Face[]{f0, f1, r0, r1, u0, u1};
 
@@ -73,9 +73,24 @@ public class RubiksCube {
     }
 
 
-    // creates a copy of the rubics cube
+    // creates a copy of the rubix cube
     public RubiksCube(RubiksCube r) {
-        // TODO
+        Face[] newFaces = new Face[6];
+        for(int i=0; i<r.faces.length; i++) {
+            Face newFace = new Face(r.faces[i].cubies[0], r.faces[i].cubiecols[0],
+                    r.faces[i].cubies[1], r.faces[i].cubiecols[1], r.faces[i].cubies[2],
+                    r.faces[i].cubiecols[2], r.faces[i].cubies[3], r.faces[i].cubiecols[3],
+                    r.faces[i].faceLocation);
+            newFaces[i] = newFace;
+        }
+        f0 = newFaces[0];
+        f1 = newFaces[1];
+        r0 = newFaces[2];
+        r1 = newFaces[3];
+        u0 = newFaces[4];
+        u1 = newFaces[5];
+
+        faces = new Face[]{f0, f1, r0, r1, u0, u1};
     }
 
     // return true if this rubik's cube is equal to the other rubik's cube
@@ -99,13 +114,47 @@ public class RubiksCube {
      */
     @Override
     public int hashCode() {
-        // TODO
-        return 0;
+        int sum = 0;
+        for(int j=0; j<u0.cubiecols.length; j++){
+            if(u0.cubiecols[j].equals("orange"))
+                sum = sum+1;
+            else if(u0.cubiecols[j].equals("green"))
+                sum = sum+2;
+            else if(u0.cubiecols[j].equals("red"))
+                sum = sum+3;
+            else if(u0.cubiecols[j].equals("blue"))
+                sum = sum+4;
+            else if(u0.cubiecols[j].equals("white"))
+                sum = sum+5;
+            else if(u0.cubiecols[j].equals("yellow"))
+                sum = sum+6;
+        }for(int j=0; j<u1.cubiecols.length; j++){
+            if(u1.cubiecols[j].equals("orange"))
+                sum = sum+1;
+            else if(u1.cubiecols[j].equals("green"))
+                sum = sum+2;
+            else if(u1.cubiecols[j].equals("red"))
+                sum = sum+3;
+            else if(u1.cubiecols[j].equals("blue"))
+                sum = sum+4;
+            else if(u1.cubiecols[j].equals("white"))
+                sum = sum+5;
+            else if(u1.cubiecols[j].equals("yellow"))
+                sum = sum+6;
+        }
+
+        return sum;
     }
 
     public boolean isSolved() {
-        // TODO
-        return false;
+        for(int i=0; i<faces.length; i++){
+            for(int j=1; j<faces[i].cubiecols.length; j++){
+                if(!faces[i].cubiecols[j-1].equals(faces[i].cubiecols[j])){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 
@@ -173,15 +222,28 @@ public class RubiksCube {
     // Given a character in ['u', 'U', 'r', 'R', 'f', 'F'], return a new rubik's cube with the rotation applied
     // Do not modify this rubik's cube.
     public RubiksCube rotate(char c) {
-        // TODO
+        RubiksCube copy = new RubiksCube(this);
+
         if (c == 'u'){
-            rotateAround(u0, f0, r0, r1, f1, 0, 1);
+            rotateAround(copy.u0, copy.f0, copy.r0, copy.r1, copy.f1, 0, 1);
         }
         else if (c == 'U'){
-
+            rotateAround(copy.u0, copy.f0, copy.r0, copy.r1, copy.f1, 2, 3);
+        }
+        else if(c == 'r'){
+            rotateAround(copy.r0, copy.f0, copy.u0, copy.u1, copy.f1, 0, 2);
+        }
+        else if(c == 'R'){
+            rotateAround(copy.r0, copy.f0, copy.u0, copy.u1, copy.f1, 1, 3);
+        }
+        else if(c == 'f'){
+            rotateAround(copy.f0, copy.r0, copy.u0, copy.u1, copy.r1, 0, 2);
+        }
+        else if(c == 'F'){
+            rotateAround(copy.f0, copy.r0, copy.u0, copy.u1, copy.r1, 1, 3);
         }
 
-        return this;
+        return copy;
     }
 
     public void printCube(){
@@ -242,9 +304,12 @@ public class RubiksCube {
 
     public static void main(String[] args){
         RubiksCube mycube = new RubiksCube();
-        mycube.printCube();
-        mycube.rotate('u');
-        mycube.printCube();
+        System.out.println(mycube.isSolved());
+        //mycube.printCube();
+        RubiksCube newcube = mycube.rotate('r');
+        System.out.println(newcube.isSolved());
+
+        //mycube.printCube();
     }
 
 }
