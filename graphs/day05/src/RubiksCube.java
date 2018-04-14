@@ -67,9 +67,13 @@ public class RubiksCube {
             Face other = (Face) obj;
 
             for (int i = 0; i < this.cubies.length; i++) {
+                /*
                 if (!other.cubies[i].equals(this.cubies[i])) {
+                    System.out.println("problem lies here");
+
                     return false;
                 }
+                */
                 if (!other.cubiecols[i].equals(this.cubiecols[i])) {
                     return false;
                 }
@@ -132,7 +136,7 @@ public class RubiksCube {
         u1 = newFaces[5];
 
 
-        Face[] faces = {f0, f1, r0, r1, u0, u1};
+        faces = new Face[]{f0, f1, r0, r1, u0, u1};
     }
 
     // return true if this rubik's cube is equal to the other rubik's cube
@@ -278,19 +282,19 @@ public class RubiksCube {
             rotateAround(copy.u0, copy.f0, copy.r0, copy.r1, copy.f1, 0, 1);
         }
         else if (c == 'U'){
-            rotateAround(copy.u0, copy.f0, copy.r0, copy.r1, copy.f1, 2, 3);
+            rotateAround(copy.u0, copy.f0, copy.r1, copy.r0, copy.f1, 0, 1);
         }
         else if(c == 'r'){
             rotateAround(copy.r0, copy.f0, copy.u0, copy.u1, copy.f1, 0, 2);
         }
         else if(c == 'R'){
-            rotateAround(copy.r0, copy.f0, copy.u0, copy.u1, copy.f1, 1, 3);
+            rotateAround(copy.r0, copy.f0, copy.u1, copy.u0, copy.f1, 0, 2);
         }
         else if(c == 'f'){
             rotateAround(copy.f0, copy.r0, copy.u0, copy.u1, copy.r1, 0, 2);
         }
         else if(c == 'F'){
-            rotateAround(copy.f0, copy.r0, copy.u0, copy.u1, copy.r1, 1, 3);
+            rotateAround(copy.f0, copy.r0, copy.u1, copy.u0, copy.r1, 0, 2);
         }
 
         return copy;
@@ -354,12 +358,16 @@ public class RubiksCube {
 
     public static void main(String[] args){
         RubiksCube mycube = new RubiksCube();
-        System.out.println(mycube.isSolved());
         //mycube.printCube();
-        RubiksCube newcube = mycube.rotate('r');
-        System.out.println(newcube.isSolved());
+        RubiksCube r = mycube;
+        for (int i = 0; i < 6; i++) {
+            r = mycube.rotate('r');
+            r = r.rotate('u');
+            r = r.rotate('R');
+            r = r.rotate('U');
+        }
 
-        //mycube.printCube();
+        r.printCube();
     }
 
 }
