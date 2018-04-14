@@ -16,15 +16,9 @@ public class RubiksCube {
      * Class to represent Cubie
      */
     public class Cubie{
-        String color1;
-        String color2;
-        String color3;
         String[] colors;
 
         public Cubie(String a, String b, String c){
-            color1 = a;
-            color2 = b;
-            color3 = c;
             colors = new String[]{a, b, c};
         }
     }
@@ -33,32 +27,18 @@ public class RubiksCube {
      * Class to represent Face
      */
     public class Face{
-        Cubie cubie1;
-        String cubie1col;
-        Cubie cubie2;
-        String cubie2col;
-        Cubie cubie3;
-        String cubie3col;
-        Cubie cubie4;
-        String cubie4col;
         String faceLocation;
         Cubie[] cubies;
+        String[] cubiecols;
 
         /**
          * Don't need to include location as parameter just input them in order of location
          */
         public Face(Cubie a, int acol, Cubie b, int bcol,
                     Cubie c, int ccol, Cubie d, int dcol, String loc){
-            cubie1 = a;
-            cubie1col = cubie1.colors[acol];
-            cubie2 = b;
-            cubie2col = cubie2.colors[bcol];
-            cubie3 = c;
-            cubie3col = cubie3.colors[ccol];
-            cubie4 = d;
-            cubie4col = cubie4.colors[dcol];
             faceLocation = loc;
-            cubies = new Cubie[]{cubie1, cubie2, cubie3, cubie4};
+            cubies = new Cubie[]{a, b, c, d};
+            cubiecols = new String[]{a.colors[acol], b.colors[bcol], c.colors[ccol], d.colors[dcol]};
         }
     }
 
@@ -138,51 +118,79 @@ public class RubiksCube {
         return rub;
     }
 
+    public void rotateAround(Face top, Face around1, Face around2, Face around3, Face around4, int index1, int index2){
+        // changing the Cubie orientation on the upper face
+        Cubie temp = top.cubies[0];
+        String tempcol = top.cubiecols[0];
+        Cubie temp2 = top.cubies[1];
+        String temp2col = top.cubiecols[1];
+        top.cubies[0] = top.cubies[2];
+        top.cubiecols[0] = top.cubiecols[2];
+        top.cubies[1] = temp;
+        top.cubiecols[1] = tempcol;
+        temp = top.cubies[3];
+        tempcol = top.cubiecols[3];
+        top.cubies[3] = temp2;
+        top.cubiecols[3] = temp2col;
+        top.cubies[2] = temp;
+        top.cubiecols[2] = tempcol;
+
+        // changing the orientation of front and right faces accordingly
+        temp = around1.cubies[index1];
+        tempcol = around1.cubiecols[index1];
+        temp2 = around1.cubies[index2];
+        temp2col = around1.cubiecols[index2];
+        around1.cubies[index1] = around2.cubies[index1];
+        around1.cubiecols[index1] = around2.cubiecols[index1];
+        around1.cubies[index2] = around2.cubies[index2];
+        around1.cubiecols[index2] = around2.cubiecols[index2];
+
+        Cubie temp3 = around3.cubies[index1];
+        String temp3col = around3.cubiecols[index1];
+        Cubie temp4 = around3.cubies[index2];
+        String temp4col = around3.cubiecols[index2];
+        around3.cubies[index1] = temp;
+        around3.cubiecols[index1] = tempcol;
+        around3.cubies[index2] = temp2;
+        around3.cubiecols[index2] = temp2col;
+
+        temp = around4.cubies[index1];
+        tempcol = around4.cubiecols[index1];
+        temp2 = around4.cubies[index2];
+        temp2col = around4.cubiecols[index2];
+        around4.cubies[index1] = temp3;
+        around4.cubiecols[index1] = temp3col;
+        around4.cubies[index2] = temp4;
+        around4.cubiecols[index2] = temp4col;
+
+        around2.cubies[index1] = temp;
+        around2.cubiecols[index1] = tempcol;
+        around2.cubies[index2] = temp2;
+        around2.cubiecols[index2] = temp2col;
+    }
+
 
     // Given a character in ['u', 'U', 'r', 'R', 'f', 'F'], return a new rubik's cube with the rotation applied
     // Do not modify this rubik's cube.
     public RubiksCube rotate(char c) {
         // TODO
         if (c == 'u'){
-            // changing the Cubie orientation on the upper face
-            Cubie temp = u0.cubie1;
-            Cubie temp2 = u0.cubie2;
-            u0.cubie1 = u0.cubie3;
-            u0.cubie2 = temp;
-            temp = u0.cubie4;
-            u0.cubie4 = temp2;
-            u0.cubie3 = temp;
-
-            // changing the orientation of front and right faces accordingly
-            temp = f0.cubie1;
-            temp2 = f0.cubie2;
-            f0.cubie1 = r0.cubie1;
-            f0.cubie2 = r0.cubie2;
-
-            Cubie temp3 = r1.cubie1;
-            Cubie temp4 = r1.cubie2;
-            r1.cubie1 = temp;
-            r1.cubie2 = temp2;
-
-            temp = f1.cubie1;
-            temp2 = f1.cubie2;
-            f1.cubie1 = temp3;
-            f1.cubie2 = temp4;
-
-            r0.cubie1 = temp;
-            r0.cubie2 = temp2;
+            rotateAround(u0, f0, r0, r1, f1, 0, 1);
         }
-        else if (c == 'U')
+        else if (c == 'U'){
+
+        }
 
         return this;
     }
 
     public void printCube(){
         for(int i=0; i<faces.length; i++){
-            System.out.print(faces[i].cubie1col + " ");
-            System.out.println(faces[i].cubie2col);
-            System.out.print(faces[i].cubie3col + " ");
-            System.out.println(faces[i].cubie4col);
+            System.out.println(faces[i].faceLocation);
+            System.out.print(faces[i].cubiecols[0] + " ");
+            System.out.println(faces[i].cubiecols[1]);
+            System.out.print(faces[i].cubiecols[2] + " ");
+            System.out.println(faces[i].cubiecols[3]);
             System.out.println();
             System.out.println();
         }
@@ -234,6 +242,8 @@ public class RubiksCube {
 
     public static void main(String[] args){
         RubiksCube mycube = new RubiksCube();
+        mycube.printCube();
+        mycube.rotate('u');
         mycube.printCube();
     }
 
