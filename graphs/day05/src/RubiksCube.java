@@ -480,13 +480,11 @@ public class RubiksCube {
         copy.f0.cubiecols[1] = copy.u0.cubiecols[1];
         copy.f0.cubiecols[3] = copy.u0.cubiecols[3];
 
-        // 1, 3 from u0 -> 0, 2 in f1
         String temp3 = copy.u1.cubiecols[1];
         String temp4 = copy.u1.cubiecols[3];
         copy.u1.cubiecols[1] = temp;
         copy.u1.cubiecols[3] = temp2;
 
-        // 0, 2 from f1 -> 1, 3 in u1
         temp = copy.f1.cubiecols[0];
         temp2 = copy.f1.cubiecols[2];
         copy.f1.cubiecols[2] = temp3;
@@ -494,6 +492,65 @@ public class RubiksCube {
 
         copy.u0.cubiecols[3] = temp;
         copy.u0.cubiecols[1] = temp2;
+
+        return copy;
+    }
+
+    public RubiksCube rotatef() {
+        RubiksCube copy = new RubiksCube(this);
+
+        // changing the Cubie orientation on the upper face
+        String temp = copy.f0.cubiecols[0];
+        String temp2 = copy.f0.cubiecols[1];
+        copy.f0.cubiecols[0] = copy.f0.cubiecols[2];
+        copy.f0.cubiecols[1] = temp;
+        temp = copy.f0.cubiecols[3];
+        copy.f0.cubiecols[3] = temp2;
+        copy.f0.cubiecols[2] = temp;
+
+        // changing the orientation of front and right faces accordingly
+        temp = copy.r0.cubiecols[0];
+        temp2 = copy.r0.cubiecols[2];
+        copy.r0.cubiecols[0] = copy.u0.cubiecols[2];
+        copy.r0.cubiecols[2] = copy.u0.cubiecols[3];
+
+        copy.u0.cubiecols[3] = copy.r1.cubiecols[1];
+        copy.u0.cubiecols[2] = copy.r1.cubiecols[3];
+
+        copy.r1.cubiecols[1] = copy.u1.cubiecols[0];
+        copy.r1.cubiecols[3] = copy.u1.cubiecols[1];
+
+        copy.u1.cubiecols[1] = temp;
+        copy.u1.cubiecols[0] = temp2;
+
+        return copy;
+    }
+
+    public RubiksCube rotateF() {
+        RubiksCube copy = new RubiksCube(this);
+
+        // changing the Cubie orientation on the upper face
+        String temp = copy.f0.cubiecols[0];
+        String temp2 = copy.f0.cubiecols[2];
+        copy.f0.cubiecols[0] = copy.f0.cubiecols[1];
+        copy.f0.cubiecols[2] = temp;
+        copy.f0.cubiecols[1] = copy.f0.cubiecols[3];
+        copy.f0.cubiecols[3] = temp2;
+
+        // changing the orientation of front and right faces accordingly
+        temp = copy.r1.cubiecols[1];
+        temp2 = copy.r1.cubiecols[3];
+        copy.r1.cubiecols[3] = copy.u0.cubiecols[2];
+        copy.r1.cubiecols[1] = copy.u0.cubiecols[3];
+
+        copy.u0.cubiecols[2] = copy.r0.cubiecols[0];
+        copy.u0.cubiecols[3] = copy.r0.cubiecols[2];
+
+        copy.r0.cubiecols[2] = copy.u1.cubiecols[0];
+        copy.r0.cubiecols[0] = copy.u1.cubiecols[1];
+
+        copy.u1.cubiecols[1] = temp;
+        copy.u1.cubiecols[0] = temp2;
 
         return copy;
     }
@@ -548,12 +605,10 @@ public class RubiksCube {
             copy = rotateR();
         }
         else if(c == 'f'){
-            rotateAround(copy.f0, copy.u1, copy.r0, copy.r1, copy.u0,
-                    0, 2,0,2, false);
+            copy = rotatef();
         }
         else if(c == 'F'){
-            rotateAround(copy.f0, copy.u1, copy.r1, copy.r0, copy.u0,
-                    0, 2,0,2, true);
+            copy = rotateF();
         }
 
         return copy;
@@ -728,7 +783,7 @@ public class RubiksCube {
         //r = r.rotate('U');
 
         RubiksCube u = mycube;
-        u = u.rotateR();
+        u = u.rotateF();
         //u = u.rotater();
         //u = u.rotateU();
 
