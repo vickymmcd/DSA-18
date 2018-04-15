@@ -115,13 +115,6 @@ public class RubiksCube {
             Face other = (Face) obj;
 
             for (int i = 0; i < this.cubies.length; i++) {
-                /*
-                if (!other.cubies[i].equals(this.cubies[i])) {
-                    System.out.println("problem lies here");
-
-                    return false;
-                }
-                */
                 if (!other.cubiecols[i].equals(this.cubiecols[i])) {
                     return false;
                 }
@@ -365,10 +358,150 @@ public class RubiksCube {
         around2.cubiecols[index2] = temp2col;
     }
 
+    public RubiksCube rotateu() {
+        RubiksCube copy = new RubiksCube(this);
+
+        // changing the Cubie orientation on the upper face
+        String temp = copy.u0.cubiecols[0];
+        String temp2 = copy.u0.cubiecols[1];
+        copy.u0.cubiecols[0] = copy.u0.cubiecols[2];
+        copy.u0.cubiecols[1] = temp;
+        temp = copy.u0.cubiecols[3];
+        copy.u0.cubiecols[3] = temp2;
+        copy.u0.cubiecols[2] = temp;
+
+        // changing the orientation of front and right faces accordingly
+        temp = copy.f0.cubiecols[0];
+        temp2 = copy.f0.cubiecols[1];
+        copy.f0.cubiecols[0] = copy.r0.cubiecols[0];
+        copy.f0.cubiecols[1] = copy.r0.cubiecols[1];
+
+        String temp3 = copy.r1.cubiecols[0];
+        String temp4 = copy.r1.cubiecols[1];
+        copy.r1.cubiecols[0] = temp;
+        copy.r1.cubiecols[1] = temp2;
+
+        temp = copy.f1.cubiecols[0];
+        temp2 = copy.f1.cubiecols[1];
+        copy.f1.cubiecols[0] = temp3;
+        copy.f1.cubiecols[1] = temp4;
+
+        copy.r0.cubiecols[0] = temp;
+        copy.r0.cubiecols[1] = temp2;
+
+        return copy;
+    }
+
+    public RubiksCube rotateU() {
+        RubiksCube copy = new RubiksCube(this);
+
+        // changing the Cubie orientation on the upper face
+        String temp = copy.u0.cubiecols[0];
+        String temp2 = copy.u0.cubiecols[2];
+        copy.u0.cubiecols[0] = copy.u0.cubiecols[1];
+        copy.u0.cubiecols[2] = temp;
+        copy.u0.cubiecols[1] = copy.u0.cubiecols[3];
+        copy.u0.cubiecols[3] = temp2;
+
+        // changing the orientation of front and right faces accordingly
+        temp = copy.r0.cubiecols[0];
+        temp2 = copy.r0.cubiecols[1];
+        copy.r0.cubiecols[0] = copy.f0.cubiecols[0];
+        copy.r0.cubiecols[1] = copy.f0.cubiecols[1];
+
+        String temp3 = copy.f1.cubiecols[0];
+        String temp4 = copy.f1.cubiecols[1];
+        copy.f1.cubiecols[0] = temp;
+        copy.f1.cubiecols[1] = temp2;
+
+        temp = copy.r1.cubiecols[0];
+        temp2 = copy.r1.cubiecols[1];
+        copy.r1.cubiecols[0] = temp3;
+        copy.r1.cubiecols[1] = temp4;
+
+        copy.f0.cubiecols[0] = temp;
+        copy.f0.cubiecols[1] = temp2;
+
+        return copy;
+    }
+
+    public RubiksCube rotater() {
+        RubiksCube copy = new RubiksCube(this);
+
+        // changing the Cubie orientation on the upper face
+        String temp = copy.r0.cubiecols[0];
+        String temp2 = copy.r0.cubiecols[1];
+        copy.r0.cubiecols[0] = copy.r0.cubiecols[2];
+        copy.r0.cubiecols[1] = temp;
+        temp = copy.r0.cubiecols[3];
+        copy.r0.cubiecols[3] = temp2;
+        copy.r0.cubiecols[2] = temp;
+
+
+        // changing the orientation of front and right faces accordingly
+        temp = copy.u0.cubiecols[1];
+        temp2 = copy.u0.cubiecols[3];
+        copy.u0.cubiecols[1] = copy.f0.cubiecols[1];
+        copy.u0.cubiecols[3] = copy.f0.cubiecols[3];
+
+        // 1, 3 from u0 -> 0, 2 in f1
+        String temp3 = copy.f1.cubiecols[0];
+        String temp4 = copy.f1.cubiecols[2];
+        copy.f1.cubiecols[2] = temp;
+        copy.f1.cubiecols[0] = temp2;
+
+        // 0, 2 from f1 -> 1, 3 in u1
+        temp = copy.u1.cubiecols[1];
+        temp2 = copy.u1.cubiecols[3];
+        copy.u1.cubiecols[3] = temp3;
+        copy.u1.cubiecols[1] = temp4;
+
+        copy.f0.cubiecols[1] = temp;
+        copy.f0.cubiecols[3] = temp2;
+
+        return copy;
+    }
+
+    public RubiksCube rotateR() {
+        RubiksCube copy = new RubiksCube(this);
+
+        // changing the Cubie orientation on the upper face
+        String temp = copy.r0.cubiecols[0];
+        String temp2 = copy.r0.cubiecols[2];
+        copy.r0.cubiecols[0] = copy.r0.cubiecols[1];
+        copy.r0.cubiecols[2] = temp;
+        copy.r0.cubiecols[1] = copy.r0.cubiecols[3];
+        copy.r0.cubiecols[3] = temp2;
+
+
+        // changing the orientation of front and right faces accordingly
+        temp = copy.f0.cubiecols[1];
+        temp2 = copy.f0.cubiecols[3];
+        copy.f0.cubiecols[1] = copy.u0.cubiecols[1];
+        copy.f0.cubiecols[3] = copy.u0.cubiecols[3];
+
+        // 1, 3 from u0 -> 0, 2 in f1
+        String temp3 = copy.u1.cubiecols[1];
+        String temp4 = copy.u1.cubiecols[3];
+        copy.u1.cubiecols[1] = temp;
+        copy.u1.cubiecols[3] = temp2;
+
+        // 0, 2 from f1 -> 1, 3 in u1
+        temp = copy.f1.cubiecols[0];
+        temp2 = copy.f1.cubiecols[2];
+        copy.f1.cubiecols[2] = temp3;
+        copy.f1.cubiecols[0] = temp4;
+
+        copy.u0.cubiecols[3] = temp;
+        copy.u0.cubiecols[1] = temp2;
+
+        return copy;
+    }
+
 
     // Given a character in ['u', 'U', 'r', 'R', 'f', 'F'], return a new rubik's cube with the rotation applied
     // Do not modify this rubik's cube.
-    public RubiksCube rotate(char c) {
+    public RubiksCube rotate1(char c) {
         RubiksCube copy = new RubiksCube(this);
 
         if (c == 'u'){
@@ -385,7 +518,34 @@ public class RubiksCube {
         }
         else if(c == 'R'){
             rotateAround(copy.r0, copy.f0, copy.u0, copy.u1, copy.f1,
-                    1, 3, 1, 3, true);
+                    1, 3, 0, 2, true);
+        }
+        else if(c == 'f'){
+            rotateAround(copy.f0, copy.u1, copy.r0, copy.r1, copy.u0,
+                    0, 2,0,2, false);
+        }
+        else if(c == 'F'){
+            rotateAround(copy.f0, copy.u1, copy.r1, copy.r0, copy.u0,
+                    0, 2,0,2, true);
+        }
+
+        return copy;
+    }
+
+    public RubiksCube rotate(char c) {
+        RubiksCube copy = new RubiksCube(this);
+
+        if (c == 'u'){
+            copy = rotateu();
+        }
+        else if (c == 'U'){
+            copy = rotateU();
+        }
+        else if(c == 'r'){
+            copy = rotater();
+        }
+        else if(c == 'R'){
+            copy = rotateR();
         }
         else if(c == 'f'){
             rotateAround(copy.f0, copy.u1, copy.r0, copy.r1, copy.u0,
@@ -563,11 +723,23 @@ public class RubiksCube {
         RubiksCube mycube = new RubiksCube();
         //mycube.printCube();
         RubiksCube r = mycube;
-        r = r.rotate('r');
-        r = r.rotate('u');
+        //r = r.rotate('u');
+        //r = r.rotate('r');
+        //r = r.rotate('U');
 
+        RubiksCube u = mycube;
+        u = u.rotateR();
+        //u = u.rotater();
+        //u = u.rotateU();
 
-        r.printCube();
+        u.printCube();
+
+        //System.out.println(u.equals(r));
+
+        //r = r.rotater();
+        //r = r.rotateu();
+
+        //r.printCube();
 
 /*
 
