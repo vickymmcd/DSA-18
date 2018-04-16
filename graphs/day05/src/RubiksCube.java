@@ -70,22 +70,22 @@ public class RubiksCube {
             colors = new String[]{a, b, c};
         }
 
-        @Override
-        public boolean equals(Object obj) {
-            if (!(obj instanceof Cubie)) {
-                return false;
-            }
-
-            Cubie other = (Cubie) obj;
-
-            for (int i = 0; i < colors.length; i++) {
-                if (!other.colors[i].equals(this.colors[i])) {
-                    return false;
-                }
-            }
-
-        return true;
-        }
+//        @Override
+//        public boolean equals(Object obj) {
+//            if (!(obj instanceof Cubie)) {
+//                return false;
+//            }
+//
+//            Cubie other = (Cubie) obj;
+//
+//            for (int i = 0; i < colors.length; i++) {
+//                if (!other.colors[i].equals(this.colors[i])) {
+//                    return false;
+//                }
+//            }
+//
+//        return true;
+//        }
     }
 
     /**
@@ -114,7 +114,7 @@ public class RubiksCube {
 
             Face other = (Face) obj;
 
-            for (int i = 0; i < this.cubies.length; i++) {
+            for (int i = 0; i < this.cubiecols.length; i++) {
                 if (!other.cubiecols[i].equals(this.cubiecols[i])) {
                     return false;
                 }
@@ -163,7 +163,6 @@ public class RubiksCube {
         prevrot = 0;
 
     }
-
 
     // creates a copy of the rubix cube
     public RubiksCube(RubiksCube r) {
@@ -517,8 +516,8 @@ public class RubiksCube {
         copy.u0.cubiecols[3] = copy.r1.cubiecols[1];
         copy.u0.cubiecols[2] = copy.r1.cubiecols[3];
 
-        copy.r1.cubiecols[1] = copy.u1.cubiecols[0];
-        copy.r1.cubiecols[3] = copy.u1.cubiecols[1];
+        copy.r1.cubiecols[1] = copy.u1.cubiecols[1];
+        copy.r1.cubiecols[3] = copy.u1.cubiecols[0];
 
         copy.u1.cubiecols[1] = temp;
         copy.u1.cubiecols[0] = temp2;
@@ -571,11 +570,11 @@ public class RubiksCube {
         }
         else if(c == 'r'){
             rotateAround(copy.r0, copy.f0, copy.u1, copy.u0, copy.f1,
-                    1, 3, 0,2, false);
+                    1, 3, 1,3, false);
         }
         else if(c == 'R'){
             rotateAround(copy.r0, copy.f0, copy.u0, copy.u1, copy.f1,
-                    1, 3, 0, 2, true);
+                    1, 3, 1, 3, true);
         }
         else if(c == 'f'){
             rotateAround(copy.f0, copy.u1, copy.r0, copy.r1, copy.u0,
@@ -590,7 +589,7 @@ public class RubiksCube {
     }
 
     public RubiksCube rotate(char c) {
-        RubiksCube copy = new RubiksCube(this);
+        RubiksCube copy;
 
         if (c == 'u'){
             copy = rotateu();
@@ -609,6 +608,9 @@ public class RubiksCube {
         }
         else if(c == 'F'){
             copy = rotateF();
+        }
+        else{
+            throw new IllegalArgumentException();
         }
 
         return copy;
@@ -692,12 +694,13 @@ public class RubiksCube {
                     x.prev = r;
                     x.prevrot = turns[i];
                     while(x.prev != null){
-                        System.out.println(x.prevrot);
                         rotations.add(x.prevrot);
                         x = x.prev;
                     }
                     Collections.reverse(rotations);
+                    System.out.println("-----------------------------------------------------------------------------------");
                     System.out.println(rotations.size());
+                    System.out.println(rotations);
                     return rotations;
                 }
                 if(!visited.contains(x)){
@@ -727,6 +730,7 @@ public class RubiksCube {
             for(int i=0; i<turns.length; i++){
                 RubiksCube b = q.cube.rotate(turns[i]);
                 u = new State(b,q.moves+1, q, turns[i]);
+                System.out.println(q.moves);
                 if(b.isSolved()){
                     this.solutionState = u;
                     this.solved = true;
@@ -754,6 +758,9 @@ public class RubiksCube {
                 }
             }
             closed.add(q);
+            if(q.moves > 10){
+                break;
+            }
 
         }
         return false;
@@ -770,7 +777,7 @@ public class RubiksCube {
             state = state.prev;
         }
         Collections.reverse(rotations);
-
+        System.out.println(rotations);
         return rotations;
     }
 
@@ -778,18 +785,13 @@ public class RubiksCube {
         RubiksCube mycube = new RubiksCube();
         //mycube.printCube();
         RubiksCube r = mycube;
-        //r = r.rotate('u');
-        //r = r.rotate('r');
+        RubiksCube u = mycube;
+        r = r.rotate('f');
         //r = r.rotate('U');
 
-        RubiksCube u = mycube;
-        u = u.rotateF();
-        //u = u.rotater();
-        //u = u.rotateU();
-
-        u.printCube();
-
-        //System.out.println(u.equals(r));
+        u = u.rotate1('f');
+        //u = u.rotate1('U');
+        System.out.println(u.equals(r));
 
         //r = r.rotater();
         //r = r.rotateu();
