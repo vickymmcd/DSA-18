@@ -516,8 +516,8 @@ public class RubiksCube {
         copy.u0.cubiecols[3] = copy.r1.cubiecols[1];
         copy.u0.cubiecols[2] = copy.r1.cubiecols[3];
 
-        copy.r1.cubiecols[1] = copy.u1.cubiecols[1];
-        copy.r1.cubiecols[3] = copy.u1.cubiecols[0];
+        copy.r1.cubiecols[3] = copy.u1.cubiecols[1];
+        copy.r1.cubiecols[1] = copy.u1.cubiecols[0];
 
         copy.u1.cubiecols[1] = temp;
         copy.u1.cubiecols[0] = temp2;
@@ -537,8 +537,8 @@ public class RubiksCube {
         copy.f0.cubiecols[3] = temp2;
 
         // changing the orientation of front and right faces accordingly
-        temp = copy.r1.cubiecols[1];
-        temp2 = copy.r1.cubiecols[3];
+        temp = copy.r1.cubiecols[3];
+        temp2 = copy.r1.cubiecols[1];
         copy.r1.cubiecols[3] = copy.u0.cubiecols[2];
         copy.r1.cubiecols[1] = copy.u0.cubiecols[3];
 
@@ -730,7 +730,6 @@ public class RubiksCube {
             for(int i=0; i<turns.length; i++){
                 RubiksCube b = q.cube.rotate(turns[i]);
                 u = new State(b,q.moves+1, q, turns[i]);
-                System.out.println(q.moves);
                 if(b.isSolved()){
                     this.solutionState = u;
                     this.solved = true;
@@ -758,17 +757,14 @@ public class RubiksCube {
                 }
             }
             closed.add(q);
-            if(q.moves > 10){
-                break;
-            }
 
         }
         return false;
     }
 
     public List<Character> solve() {
-        //return solveBFS();
-        solveIt();
+        return solveBFS();
+        /*solveIt();
         State state = this.solutionState;
         ArrayList<Character> rotations = new ArrayList<>();
         while(state != null){
@@ -778,20 +774,23 @@ public class RubiksCube {
         }
         Collections.reverse(rotations);
         System.out.println(rotations);
-        return rotations;
+        return rotations;*/
     }
 
     public static void main(String[] args){
         RubiksCube mycube = new RubiksCube();
+        RubiksCube c = new RubiksCube().rotate(Arrays.asList('u', 'r', 'u', 'F', 'U', 'R', 'F','f', 'U', 'F', 'r', 'f'));
+        c.printCube();
+
         //mycube.printCube();
-        RubiksCube r = mycube;
-        RubiksCube u = mycube;
-        r = r.rotate('f');
+        //RubiksCube r = mycube;
+        //RubiksCube u = mycube;
+        //r = r.rotate('f');
         //r = r.rotate('U');
 
-        u = u.rotate1('f');
+        //u = u.rotate1('f');
         //u = u.rotate1('U');
-        System.out.println(u.equals(r));
+        //System.out.println(u.equals(r));
 
         //r = r.rotater();
         //r = r.rotateu();

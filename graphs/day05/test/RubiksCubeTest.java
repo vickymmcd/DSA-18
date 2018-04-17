@@ -104,10 +104,10 @@ public class RubiksCubeTest {
         RubiksCube r = new RubiksCube();
         for (int i = 0; i < 6; i++) {
             assertEquals(r.isSolved(), i == 0);
-            r = r.rotate('R');
-            r = r.rotate('F');
             r = r.rotate('r');
-            r = r.rotate('f');
+            r = r.rotate('u');
+            r = r.rotate('R');
+            r = r.rotate('U');
         }
         r.printCube();
         assertTrue(r.isSolved());
