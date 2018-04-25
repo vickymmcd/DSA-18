@@ -4,9 +4,9 @@ public class SplitCoins {
     // Guess: we include the value in sum1 (to make smaller difference) or not
     // Recurrence Relation: mindiff(adding coins[i] to sum1, not adding coins[i] to sum1)
     // Memo/Recurse: DP[i][j] = Min(splitcoins(sum1+coins[i]), splitcoins(sum1))
-    // Solve final: return DP[0][0]
-    // runtime and space o(n^2) where n is length/width of map
-    // this is top down approach
+    // Solve final: return min DP with index 0
+    // runtime and space are o(n*m) where n is number of coins and m is largest sum
+    // this is a top down approach
 
     public static int splitCoinsRecursive(int[] coins, int sum1, int totalSum, int index, int[][] DP){
         int sum2 = totalSum-sum1;
