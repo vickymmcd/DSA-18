@@ -1,7 +1,16 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class TextJustification {
+
+    // Subproblem: DP[i] = min cost for words from word i to the end
+    // Guess: end line after word i? don't end line yet?
+    // Recurrence Relation: Min(deleting, inserting, replacing, doing nothing)
+    // Memo/Recurse: DP[i][j] = min(deleting, inserting, replacing)
+    // Solve final: return DP[a.length][b.length]
+    // runtime and space o(n^2) where n is string length
+    // this is my bottom up approach
 
     private static double cost(String[] words, int lo, int hi, int m) {
         if (hi <= lo)
@@ -16,7 +25,7 @@ public class TextJustification {
     }
 
     public static List<Integer> justifyText(String[] w, int m) {
-        return null;
-    }
+        return new ArrayList<Integer>();
 
+    }
 }
